@@ -48,7 +48,7 @@ export const profile = {
   headline: [
     { value: "80%", count: 80, label: "faster IT ticket closure" },
     { value: "~$600K", count: 600, label: "saved on leases" },
-    { value: "3rd of 245", count: 245, label: "Arize track, Google Cloud Rapid Agent Hackathon" },
+    { value: "3rd of 245", count: 245, label: "final-round submissions, Arize track, Google Cloud Rapid Agent Hackathon" },
   ] as Headline[],
   email: "reubenalexa@gmail.com",
   github: "https://github.com/Reuben-Alex",
@@ -69,11 +69,10 @@ export const career: Span = {
       summary: "Internship Trainee at Mu Sigma",
       start: "2023-01-01",
       end: "2024-09-01",
-      description: "Internship Trainee at Mu Sigma, on site in India.",
-      stack: ["IT business analysis"],
+      description: "Internship Trainee at Mu Sigma.",
     },
     {
-      id: "sixtysix_degrees",
+      id: "66degrees",
       title: "66degrees",
       kind: "group",
       children: [
@@ -97,7 +96,7 @@ export const career: Span = {
           start: "2025-06-01",
           end: null,
           description:
-            "I design and deploy multi-agent systems on Google ADK, Vertex AI and Gemini Enterprise for enterprise clients, and work directly with client teams on requirements, demos and rollout. 66degrees is a Google Cloud AI Partner of the Year.",
+            "I design and deploy multi-agent systems on Google ADK, Vertex AI and Gemini Enterprise for enterprise clients, and work directly with client teams on requirements, demos and rollout. Four of the six engagements are shown here. 66degrees is a Google Cloud AI Partner of the Year.",
           metric: "6 client engagements",
           stack: [
             "Google ADK",

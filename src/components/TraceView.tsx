@@ -114,8 +114,10 @@ export function TraceView({ root, nowISO, defaultId }: Props) {
 
   // Stream-in: rows are plain and visible in the server HTML ("static"). Once the page is
   // live they wait off screen ("pending") and play when the trace scrolls into view ("run").
-  const reduced = useReducedMotion();
   const isClient = useIsClient();
+  // Motion reads the preference during hydration; waiting for isClient keeps the first
+  // client render identical to the server HTML.
+  const reduced = Boolean(useReducedMotion()) && isClient;
   const inView = useInView(paneRef, { once: true, amount: 0.1 });
   const phase = reduced || !isClient ? "static" : inView ? "run" : "pending";
 
@@ -247,8 +249,13 @@ export function TraceView({ root, nowISO, defaultId }: Props) {
                         }`}
                       >
                         {span.id}
+                        {span.status && (
+                          <span className="ml-2 font-sans text-[10px] text-amber-200/80">
+                            {span.status}
+                          </span>
+                        )}
                       </span>
-                      <span className="mt-0.5 block text-xs leading-snug text-muted lg:truncate">
+                      <span className="mt-0.5 block text-xs leading-snug text-muted">
                         {span.summary}
                       </span>
                     </span>

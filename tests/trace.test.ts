@@ -110,5 +110,6 @@ describe("formatMonth", () => {
   it("names the month and year in UTC", () => {
     expect(formatMonth(d("2026-06-08"))).toBe("Jun 2026");
     expect(formatMonth(d("2025-01-01"))).toBe("Jan 2025");
+    expect(formatMonth(d("2024-09-01"))).toBe("Sep 2024");
   });
 });

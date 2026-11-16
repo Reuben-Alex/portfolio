@@ -38,7 +38,7 @@ describe("server-rendered page", () => {
   });
 
   it("leaves out what was excluded", () => {
-    expect(text).not.toContain("Christ");
+    expect(text.toLowerCase()).not.toContain("university");
     expect(text.toLowerCase()).not.toContain("résumé");
   });
 });

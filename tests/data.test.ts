@@ -13,7 +13,7 @@ describe("trace data", () => {
     expect(all.map((s) => s.id)).toEqual([
       "career",
       "mu_sigma_trainee",
-      "sixtysix_degrees",
+      "66degrees",
       "intern_sam2",
       "associate_engineer",
       "it_hr_multi_agent",
@@ -76,7 +76,13 @@ describe("trace data", () => {
     const text = JSON.stringify({ career, evals, profile }).toLowerCase();
     expect(text).not.toContain("résumé");
     expect(text).not.toContain("resume");
-    expect(text).not.toContain("christ university");
+    expect(text).not.toContain("university");
+  });
+
+  it("shows Mu Sigma only as title, company and dates", () => {
+    const s = byId("mu_sigma_trainee");
+    expect(s.stack).toBeUndefined();
+    expect(s.description).toBe("Internship Trainee at Mu Sigma.");
   });
 
   it("has five evals", () => {

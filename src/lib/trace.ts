@@ -24,8 +24,11 @@ export function parseDay(day: string): Date {
   return new Date(`${day}T00:00:00Z`);
 }
 
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+/** Fixed month names, so the server and every browser render the same text. */
 export function formatMonth(date: Date): string {
-  return date.toLocaleDateString("en-GB", { month: "short", year: "numeric", timeZone: "UTC" });
+  return `${MONTHS[date.getUTCMonth()]} ${date.getUTCFullYear()}`;
 }
 
 export function flatten(root: Span, depth = 0, parent: Span | null = null): FlatSpan[] {

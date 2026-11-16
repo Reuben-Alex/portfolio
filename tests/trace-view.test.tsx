@@ -83,4 +83,17 @@ describe("TraceView", () => {
     expect(row("clintrace")).toHaveTextContent("Jun 2026");
     expect(row("associate_engineer")).not.toHaveTextContent(/20dd/);
   });
+
+  it("lets results wrap instead of cutting them off", () => {
+    const { row } = setup();
+    const summary = [...row("lease_agent").querySelectorAll("span")].find(
+      (el) => el.textContent === "800+ leases tracked, close to $600,000 saved",
+    )!;
+    expect(summary.className).not.toContain("truncate");
+  });
+
+  it("shows a span's status in its row", () => {
+    const { row } = setup();
+    expect(row("revenant")).toHaveTextContent("in development");
+  });
 });

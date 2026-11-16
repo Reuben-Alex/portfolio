@@ -56,6 +56,16 @@ describe("stream-in", () => {
   });
 });
 
+describe("server HTML under reduced motion", () => {
+  it("still contains the replay button, so hydration matches", () => {
+    reduced.value = true;
+    const html = renderToStaticMarkup(
+      <TraceView root={career} nowISO="2026-11-16" defaultId={DEFAULT_SPAN_ID} />,
+    );
+    expect(html).toContain("replay</button>");
+  });
+});
+
 describe("CountUp", () => {
   it("renders the final value on the server", () => {
     for (const h of profile.headline) {
@@ -73,6 +83,9 @@ describe("CountUp", () => {
 describe("metadata", () => {
   it("names him and carries the sourced hackathon wording", () => {
     expect(String(siteMetadata.title)).toContain("Reuben Alex");
-    expect(siteMetadata.description).toContain("3rd of 245");
+    expect(siteMetadata.description).toContain(
+      "3rd of 245 final-round submissions in the Arize track of the Google Cloud Rapid Agent Hackathon",
+    );
+    expect(profile.headline[2].label).toContain("final-round submissions");
   });
 });
