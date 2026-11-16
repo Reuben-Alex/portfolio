@@ -18,6 +18,7 @@ import {
   axisYears,
   barFor,
   flatten,
+  formatMonth,
   parseDay,
   pctOf,
   type Range,
@@ -32,6 +33,9 @@ interface Props {
 }
 
 const ROW_GRID = "lg:grid lg:grid-cols-[minmax(0,46%)_minmax(0,1fr)] lg:items-stretch";
+
+/** Bars narrower than this get their month written beside them. */
+const SHORT_BAR_PCT = 5;
 
 const subscribeNever = () => () => {};
 /** False on the server and during hydration, true afterwards. */
@@ -69,9 +73,9 @@ function Crosshair({ range, hostRef }: { range: Range; hostRef: RefObject<HTMLEl
   const label =
     pct === null
       ? null
-      : new Date(
-          range.start.getTime() + pct * (range.end.getTime() - range.start.getTime()),
-        ).toLocaleDateString("en-GB", { month: "short", year: "numeric", timeZone: "UTC" });
+      : formatMonth(
+          new Date(range.start.getTime() + pct * (range.end.getTime() - range.start.getTime())),
+        );
 
   return (
     <div
@@ -250,6 +254,14 @@ export function TraceView({ root, nowISO, defaultId }: Props) {
                     </span>
                     <span className="relative mr-4 hidden lg:block" aria-hidden>
                       {gridlines}
+                      {bar && !bar.dashed && bar.widthPct < SHORT_BAR_PCT && (
+                        <span
+                          className="absolute top-1/2 -translate-y-1/2 pr-2 font-mono text-[10px] text-muted"
+                          style={{ right: `${100 - bar.leftPct}%` }}
+                        >
+                          {formatMonth(parseDay(span.start!))}
+                        </span>
+                      )}
                       {bar && (
                         <span
                           data-bar

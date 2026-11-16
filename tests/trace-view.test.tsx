@@ -77,4 +77,10 @@ describe("TraceView", () => {
     expect(inline("re_entry")).toBeVisible();
     expect(inline("clintrace")).not.toBeVisible();
   });
+
+  it("labels short project bars with their month", () => {
+    const { row } = setup();
+    expect(row("clintrace")).toHaveTextContent("Jun 2026");
+    expect(row("associate_engineer")).not.toHaveTextContent(/20dd/);
+  });
 });

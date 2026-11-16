@@ -8,6 +8,7 @@ import {
   countSpans,
   flatten,
   formatDuration,
+  formatMonth,
 } from "@/lib/trace";
 
 const d = (s: string) => new Date(`${s}T00:00:00Z`);
@@ -102,5 +103,12 @@ describe("barFor", () => {
     expect(bar.leftPct + bar.widthPct).toBeGreaterThan(97);
     expect(bar.leftPct + bar.widthPct).toBeLessThanOrEqual(100);
     expect(axisYears(laterRange).at(-1)).toBe(2027);
+  });
+});
+
+describe("formatMonth", () => {
+  it("names the month and year in UTC", () => {
+    expect(formatMonth(d("2026-06-08"))).toBe("Jun 2026");
+    expect(formatMonth(d("2025-01-01"))).toBe("Jan 2025");
   });
 });

@@ -1,5 +1,5 @@
 import type { Span } from "@/data/trace";
-import { parseDay } from "@/lib/trace";
+import { formatMonth, parseDay } from "@/lib/trace";
 
 const KIND_LABEL: Record<Span["kind"], string> = {
   group: "group",
@@ -8,13 +8,7 @@ const KIND_LABEL: Record<Span["kind"], string> = {
   project: "side project",
 };
 
-function month(day: string): string {
-  return parseDay(day).toLocaleDateString("en-GB", {
-    month: "short",
-    year: "numeric",
-    timeZone: "UTC",
-  });
-}
+const month = (day: string) => formatMonth(parseDay(day));
 
 function dateRange(span: Span): string | null {
   if (!span.start) return null;

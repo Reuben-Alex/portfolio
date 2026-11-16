@@ -24,6 +24,10 @@ export function parseDay(day: string): Date {
   return new Date(`${day}T00:00:00Z`);
 }
 
+export function formatMonth(date: Date): string {
+  return date.toLocaleDateString("en-GB", { month: "short", year: "numeric", timeZone: "UTC" });
+}
+
 export function flatten(root: Span, depth = 0, parent: Span | null = null): FlatSpan[] {
   return [
     { span: root, depth, parent },

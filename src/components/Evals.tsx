@@ -15,14 +15,14 @@ export function Evals({ evals }: { evals: Eval[] }) {
         {evals.map((e) => (
           <li
             key={e.name}
-            className="flex flex-wrap items-center gap-x-4 gap-y-1 border-b border-line px-4 py-3.5 transition-colors last:border-b-0 hover:bg-ink/[0.04]"
+            className="flex items-start gap-3 border-b border-line px-4 py-3.5 transition-colors last:border-b-0 hover:bg-ink/[0.04] sm:items-center"
           >
-            <span className="rounded border border-accent/30 bg-accent/10 px-1.5 py-0.5 font-mono text-[11px] text-accent">
+            <span className="shrink-0 rounded border border-accent/30 bg-accent/10 px-1.5 py-0.5 font-mono text-[11px] text-accent">
               PASS
             </span>
-            <span className="text-sm text-ink">{e.name}</span>
-            <span className="w-full font-mono text-xs text-muted sm:ml-auto sm:w-auto">
-              {e.issuer}
+            <span className="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between sm:gap-4">
+              <span className="block text-sm text-ink">{e.name}</span>
+              <span className="mt-0.5 block font-mono text-xs text-muted sm:mt-0">{e.issuer}</span>
             </span>
           </li>
         ))}
