@@ -1,9 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   cacheComponents: true,
   partialPrefetching: true,
+  // Frozen at build time: the trace's time axis ends at the build month.
+  env: {
+    NEXT_PUBLIC_BUILD_DAY: new Date().toISOString().slice(0, 10),
+  },
   turbopack: {
     rules: {
       "*.css": {
