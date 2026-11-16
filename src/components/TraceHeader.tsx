@@ -1,3 +1,4 @@
+import { CountUp } from "@/components/CountUp";
 import type { profile as Profile } from "@/data/trace";
 
 interface Props {
@@ -51,7 +52,9 @@ export function TraceHeader({ profile, spanCount, duration }: Props) {
               key={h.label}
               className="rounded-xl border border-line bg-surface p-5 transition-colors hover:border-accent/40"
             >
-              <dt className="font-mono text-3xl text-accent sm:text-4xl">{h.value}</dt>
+              <dt className="font-mono text-3xl text-accent sm:text-4xl">
+                <CountUp value={h.value} count={h.count} />
+              </dt>
               <dd className="mt-2 text-sm text-muted">{h.label}</dd>
             </div>
           ))}

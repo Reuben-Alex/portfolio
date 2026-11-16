@@ -18,7 +18,6 @@ export default function Home() {
       <section className="mx-auto max-w-7xl px-4 sm:px-6" aria-label="Career trace">
         <h2 className="mb-5 font-mono text-sm text-ink">
           <span className="text-accent">#</span> span waterfall
-          <span className="ml-3 text-xs text-muted">select a span to inspect it</span>
         </h2>
         <TraceView root={career} nowISO={nowISO} defaultId={DEFAULT_SPAN_ID} />
       </section>

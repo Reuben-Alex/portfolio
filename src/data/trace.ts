@@ -35,6 +35,8 @@ export interface Eval {
 
 export interface Headline {
   value: string;
+  /** The number inside `value` that counts up on load. */
+  count: number;
   label: string;
 }
 
@@ -44,9 +46,9 @@ export const profile = {
   location: "Bengaluru, India",
   tagline: "I build AI agents that run inside real enterprise systems.",
   headline: [
-    { value: "80%", label: "faster IT ticket closure" },
-    { value: "~$600K", label: "saved on leases" },
-    { value: "3rd of 245", label: "Arize track, Google Cloud Rapid Agent Hackathon" },
+    { value: "80%", count: 80, label: "faster IT ticket closure" },
+    { value: "~$600K", count: 600, label: "saved on leases" },
+    { value: "3rd of 245", count: 245, label: "Arize track, Google Cloud Rapid Agent Hackathon" },
   ] as Headline[],
   email: "reubenalexa@gmail.com",
   github: "https://github.com/Reuben-Alex",

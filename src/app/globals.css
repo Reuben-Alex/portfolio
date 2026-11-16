@@ -13,10 +13,130 @@
 
 html {
   color-scheme: dark;
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--color-bg);
   color: var(--color-ink);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+::selection {
+  background: rgb(124 247 196 / 0.3);
+}
+
+/* Faint grid and a glow behind the hero, fading out down the page. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(700px 420px at 12% -5%, rgb(124 247 196 / 0.1), transparent 70%),
+    linear-gradient(rgb(31 36 44 / 0.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(31 36 44 / 0.5) 1px, transparent 1px);
+  background-size:
+    auto,
+    56px 56px,
+    56px 56px;
+  mask-image: linear-gradient(to bottom, black, transparent 85%);
+}
+
+/* Pointer-following glow on the trace card. --mx/--my are set from TraceView. */
+.glow-surface {
+  position: relative;
+}
+.glow-surface::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    420px circle at var(--mx, -999px) var(--my, -999px),
+    rgb(124 247 196 / 0.08),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.glow-surface:hover::before {
+  opacity: 1;
+}
+
+/* Stream-in. data-phase is "static" in server HTML, so nothing is hidden without JavaScript. */
+ul[data-phase="pending"] .span-row {
+  opacity: 0;
+}
+ul[data-phase="run"] .span-row {
+  animation: row-in 0.45s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--i) * 55ms);
+}
+ul[data-phase="run"] [data-bar] {
+  transform-origin: left center;
+  animation: bar-grow 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  animation-delay: calc(var(--i) * 55ms + 150ms);
+}
+@keyframes row-in {
+  from {
+    opacity: 0;
+    translate: -12px 0;
+  }
+}
+@keyframes bar-grow {
+  from {
+    scale: 0 1;
+  }
+}
+
+/* A project's pipeline steps light up in turn. Delay and duration are set per step. */
+.pipeline-step {
+  animation-name: step-pulse;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+@keyframes step-pulse {
+  0%,
+  32%,
+  100% {
+    border-color: var(--color-line);
+    color: var(--color-ink);
+    box-shadow: none;
+  }
+  8%,
+  22% {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    box-shadow: 0 0 14px rgb(124 247 196 / 0.3);
+  }
+}
+
+.status-dot {
+  animation: status-ping 2.4s ease-out infinite;
+}
+@keyframes status-ping {
+  0% {
+    box-shadow: 0 0 0 0 rgb(124 247 196 / 0.6);
+  }
+  70%,
+  100% {
+    box-shadow: 0 0 0 6px rgb(124 247 196 / 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .span-row,
+  [data-bar],
+  .pipeline-step,
+  .status-dot {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+  .glow-surface::before {
+    display: none;
+  }
 }
