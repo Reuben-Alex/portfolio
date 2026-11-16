@@ -25,6 +25,8 @@ export interface Span {
   pipeline?: string[];
   status?: string;
   caveat?: string;
+  /** A YouTube video shown in the span's detail. */
+  video?: { id: string; title: string };
   children?: Span[];
 }
 
@@ -178,6 +180,7 @@ export const career: Span = {
             "BigQuery",
           ],
           pipeline: ["parse", "assess", "route", "feedback", "audit"],
+          video: { id: "hKs4fqzKKHw", title: "ClinTrace hackathon video" },
           links: [{ label: "GitHub", href: "https://github.com/Reuben-Alex/ClinTrace" }],
         },
         {
@@ -194,6 +197,7 @@ export const career: Span = {
           pipeline: ["find", "prove", "fix", "verify"],
           caveat:
             "The misses are published: two wins needed a hand-written fallback and six targets had no working exploit in the benchmark pass. All 13 control contracts correctly came back clean.",
+          video: { id: "LTIwdPee_do", title: "Re-entry hackathon video" },
           links: [{ label: "GitHub", href: "https://github.com/Reuben-Alex/re-entry" }],
         },
         {

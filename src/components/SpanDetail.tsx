@@ -1,3 +1,4 @@
+import { VideoEmbed } from "@/components/VideoEmbed";
 import type { Span } from "@/data/trace";
 import { formatMonth, parseDay } from "@/lib/trace";
 
@@ -20,13 +21,20 @@ function dateRange(span: Span): string | null {
 const chip = "rounded border border-line px-2 py-0.5 font-mono text-[11px] text-muted";
 const label = "font-mono text-[11px] uppercase tracking-wider text-muted";
 
-export function SpanDetail({ span }: { span: Span }) {
+interface Props {
+  span: Span;
+  /** Show the one-line result under the title (where no row beside the detail already shows it). */
+  withSummary?: boolean;
+}
+
+export function SpanDetail({ span, withSummary = false }: Props) {
   const dates = dateRange(span);
   const steps = span.pipeline ?? [];
   return (
     <div>
       <p className="font-mono text-xs text-accent">{span.id}</p>
-      <h3 className="mt-1 text-xl font-semibold tracking-tight">{span.title}</h3>
+      <h3 className="mt-1 font-display text-2xl font-semibold tracking-tight">{span.title}</h3>
+      {withSummary && <p className="mt-1 text-sm text-muted">{span.summary}</p>}
 
       <div className="mt-3 flex flex-wrap gap-1.5">
         <span className={chip}>{KIND_LABEL[span.kind]}</span>
@@ -45,6 +53,12 @@ export function SpanDetail({ span }: { span: Span }) {
       )}
 
       <p className="mt-5 text-sm leading-relaxed text-ink/85">{span.description}</p>
+
+      {span.video && (
+        <div className="mt-5">
+          <VideoEmbed id={span.video.id} title={span.video.title} />
+        </div>
+      )}
 
       {steps.length > 0 && (
         <div className="mt-5">

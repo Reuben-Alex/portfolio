@@ -5,7 +5,6 @@ import {
   useMemo,
   useRef,
   useState,
-  useSyncExternalStore,
   type CSSProperties,
   type KeyboardEvent,
   type PointerEvent as ReactPointerEvent,
@@ -23,6 +22,7 @@ import {
   pctOf,
   type Range,
 } from "@/lib/trace";
+import { useIsClient } from "@/lib/use-is-client";
 import { SpanDetail } from "@/components/SpanDetail";
 
 interface Props {
@@ -36,16 +36,6 @@ const ROW_GRID = "lg:grid lg:grid-cols-[minmax(0,46%)_minmax(0,1fr)] lg:items-st
 
 /** Bars narrower than this get their month written beside them. */
 const SHORT_BAR_PCT = 5;
-
-const subscribeNever = () => () => {};
-/** False on the server and during hydration, true afterwards. */
-function useIsClient(): boolean {
-  return useSyncExternalStore(
-    subscribeNever,
-    () => true,
-    () => false,
-  );
-}
 
 /** A vertical line with a month label that follows the pointer across the timeline. */
 function Crosshair({ range, hostRef }: { range: Range; hostRef: RefObject<HTMLElement | null> }) {
@@ -222,7 +212,7 @@ export function TraceView({ root, nowISO, defaultId }: Props) {
                     isSelected ? "border-accent" : "border-accent/35 group-hover:border-accent/80"
                   }`
                 : isSelected
-                  ? "bg-accent shadow-[0_0_14px_rgb(124_247_196/0.55)]"
+                  ? "bg-accent shadow-[0_0_14px_rgb(255_179_71/0.55)]"
                   : span.kind === "project"
                     ? "bg-accent/55 group-hover:bg-accent"
                     : "bg-ink/30 group-hover:bg-ink/60";

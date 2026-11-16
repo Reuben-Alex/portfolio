@@ -1,12 +1,14 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-bg: #0a0c0f;
-  --color-surface: #12151a;
-  --color-line: #1f242c;
-  --color-ink: #e6e8eb;
-  --color-muted: #8b93a0;
-  --color-accent: #7cf7c4;
+  --color-bg: #060912;
+  --color-surface: #0d1424;
+  --color-line: #1e2a44;
+  --color-ink: #e9edf6;
+  --color-muted: #8d99b3;
+  --color-accent: #ffb347;
+  --color-ice: #7fd8ff;
+  --font-display: var(--font-bricolage);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -25,7 +27,7 @@ body {
 }
 
 ::selection {
-  background: rgb(124 247 196 / 0.3);
+  background: rgb(255 179 71 / 0.3);
 }
 
 /* Faint grid and a glow behind the hero, fading out down the page. */
@@ -36,9 +38,9 @@ body::before {
   z-index: -1;
   pointer-events: none;
   background-image:
-    radial-gradient(700px 420px at 12% -5%, rgb(124 247 196 / 0.1), transparent 70%),
-    linear-gradient(rgb(31 36 44 / 0.5) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(31 36 44 / 0.5) 1px, transparent 1px);
+    radial-gradient(700px 420px at 12% -5%, rgb(127 216 255 / 0.08), transparent 70%),
+    linear-gradient(rgb(30 42 68 / 0.45) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(30 42 68 / 0.45) 1px, transparent 1px);
   background-size:
     auto,
     56px 56px,
@@ -57,7 +59,7 @@ body::before {
   pointer-events: none;
   background: radial-gradient(
     420px circle at var(--mx, -999px) var(--my, -999px),
-    rgb(124 247 196 / 0.08),
+    rgb(255 179 71 / 0.08),
     transparent 70%
   );
   opacity: 0;
@@ -110,7 +112,7 @@ ul[data-phase="run"] [data-bar] {
   22% {
     border-color: var(--color-accent);
     color: var(--color-accent);
-    box-shadow: 0 0 14px rgb(124 247 196 / 0.3);
+    box-shadow: 0 0 14px rgb(255 179 71 / 0.3);
   }
 }
 
@@ -119,11 +121,11 @@ ul[data-phase="run"] [data-bar] {
 }
 @keyframes status-ping {
   0% {
-    box-shadow: 0 0 0 0 rgb(124 247 196 / 0.6);
+    box-shadow: 0 0 0 0 rgb(255 179 71 / 0.6);
   }
   70%,
   100% {
-    box-shadow: 0 0 0 6px rgb(124 247 196 / 0);
+    box-shadow: 0 0 0 6px rgb(255 179 71 / 0);
   }
 }
 

@@ -5,11 +5,11 @@ export const alt = `${profile.name}: ${profile.tagline}`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const BG = "#0a0c0f";
-const LINE = "#1f242c";
-const INK = "#e6e8eb";
-const MUTED = "#8b93a0";
-const ACCENT = "#7cf7c4";
+const BG = "#060912";
+const LINE = "#1e2a44";
+const INK = "#e9edf6";
+const MUTED = "#8d99b3";
+const ACCENT = "#ffb347";
 
 // Decorative bars echoing the waterfall: [left %, width %, solid?]
 const BARS: [number, number, boolean][] = [
@@ -69,7 +69,7 @@ export default function Image() {
                   padding: "12px 20px",
                   borderRadius: 12,
                   border: `1px solid ${LINE}`,
-                  background: "#12151a",
+                  background: "#0d1424",
                 }}
               >
                 <div style={{ color: ACCENT, fontSize: 32 }}>{h.value}</div>
@@ -90,7 +90,7 @@ export default function Image() {
                   width: `${width}%`,
                   height: 10,
                   borderRadius: 5,
-                  background: solid ? ACCENT : "#3a4049",
+                  background: solid ? ACCENT : "#2b3a5c",
                 }}
               />
             </div>

@@ -21,3 +21,6 @@ class InstantIntersectionObserver {
 }
 globalThis.IntersectionObserver =
   InstantIntersectionObserver as unknown as typeof IntersectionObserver;
+
+// jsdom has no WebGL; say so quietly instead of logging "not implemented".
+HTMLCanvasElement.prototype.getContext = (() => null) as typeof HTMLCanvasElement.prototype.getContext;
