@@ -43,3 +43,6 @@ next-env.d.ts
 
 # design notes and plans, kept local
 /docs/
+
+.vercel
+.env*
